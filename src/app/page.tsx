@@ -1,11 +1,9 @@
 import React from 'react';
-import Banner from './component/Banner';
 
 
-const page = () => {
+const page = async () => {
   return (
     <div>
-      <Banner></Banner>
 
     </div>
   );
