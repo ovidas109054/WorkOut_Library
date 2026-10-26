@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import {Bookmark } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import AddButton from '../../component/Buttons/AddButton';
+import SaveButton from '../../component/Buttons/SaveButton';
 
 
 const page = async ({ params }) => {
@@ -64,7 +65,7 @@ const page = async ({ params }) => {
                         <span className="text-sm text-gray-200">{rating}</span>
                     </div>
                 </div>
-                
+
 
 
                 <div className="mt-6">
@@ -78,10 +79,9 @@ const page = async ({ params }) => {
                         ))}
                     </ol>
                 </div>
-                <div className="card-actions mt-10 flex gap-4 ">
+                <div className="card-actions mt-10 flex gap-4">
                     <AddButton exercise={data} />
-                    <button className="btn bg-transparent rounded-2xl hover:scale-[1.02]"> <Bookmark size={18} />Save for later</button>
-
+                    <SaveButton exercise={data} />
                 </div>
             </div>
         </div >

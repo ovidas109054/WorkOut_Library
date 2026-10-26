@@ -1,20 +1,35 @@
-"use client"
 
-import { CalendarDays } from "lucide-react";
-import React, { useContext } from 'react';
+"use client";
+
+import { useContext } from "react";
+import { Dumbbell } from "lucide-react";
+import { toast } from "react-toastify";
 import { ExContext } from "../../context/ExProvider";
+import { toast } from "react-toastify";
 
-const AddButton = (data) => {
+toast.success("Added to today's plan!");
 
-    const{AddTodays,setAddTodays} = useContext(ExContext);
+const AddButton = ({ exercise }) => {
+    const { addToToday } = useContext(ExContext);
 
-    const handelAddbut = () =>{
-        setAddTodays([...AddTodays, data])
-    }
+    const handleAdd = () => {
+        const result = addToToday(exercise);
+
+        if (result) {
+            toast.success("Added to today's plan!");
+        } else {
+            toast.error("Already added or maximum limit reached!");
+        }
+    };
+
     return (
-        <div>
-            <button className="btn bg-[#c6ff00] text-gray-800 rounded-2xl hover:scale-[1.02]" onClick={() =>handelAddbut()}><CalendarDays size={18} />Add to today&apos;s plan</button>
-        </div>
+        <button
+            onClick={handleAdd}
+            className="btn bg-[#c6ff00] text-black rounded-2xl hover:scale-[1.02]"
+        >
+            <Dumbbell size={18} />
+            Add to Today&apos;s Plan
+        </button>
     );
 };
 
