@@ -1,7 +1,12 @@
-import React from 'react';
+"use client";
+
+import React, { useContext } from 'react';
+import { ExContext } from '../context/ExProvider';
 
 const page = () => {
+    const{AddTodays: AddButton} = useContext(ExContext);
     return (
+
         <div className=' mx-auto mt-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='p-5'>
                 <h1 className='text-4xl'>MY PLAN</h1>
