@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const ExContext = createContext(null);
 
@@ -11,62 +11,71 @@ const ExProvider = ({ children }) => {
 
     const addToToday = (exercise) => {
         if (AddTodays.some((item) => item.id === exercise.id)) {
-            return false;
+            return "duplicate";
         }
 
         if (AddTodays.length >= 5) {
-            return false;
+            return "limit";
         }
 
-        setAddTodays([...AddTodays, { ...exercise, completed: false }]);
-        setSaveAs(SaveAs.filter((item) => item.id !== exercise.id));
+        setAddTodays((prev) => [
+            ...prev,
+            { ...exercise, completed: false },
+        ]);
 
-        return true;
+        setSaveAs((prev) =>
+            prev.filter((item) => item.id !== exercise.id)
+        );
+
+        return "success";
     };
 
     const saveForLater = (exercise) => {
         if (SaveAs.some((item) => item.id === exercise.id)) {
-            return false;
+            return "duplicate";
         }
 
-        setSaveAs([...SaveAs, exercise]);
-        setAddTodays(AddTodays.filter((item) => item.id !== exercise.id));
+        setSaveAs((prev) => [...prev, exercise]);
 
-        return true;
+        setAddTodays((prev) =>
+            prev.filter((item) => item.id !== exercise.id)
+        );
+
+        return "success";
     };
 
     const removeFromToday = (id) => {
-        setAddTodays(AddTodays.filter((item) => item.id !== id));
+        setAddTodays((prev) => prev.filter((item) => item.id !== id));
     };
 
     const removeFromSaved = (id) => {
-        setSaveAs(SaveAs.filter((item) => item.id !== id));
+        setSaveAs((prev) => prev.filter((item) => item.id !== id));
     };
 
     const markAsDone = (id) => {
-        setAddTodays(
-            AddTodays.map((item) =>
+        setAddTodays((prev) =>
+            prev.map((item) =>
                 item.id === id
-                    ? { ...item, completed: true }
+                    ? { ...item, completed: !item.completed }
                     : item
             )
         );
     };
 
-    const sharedData = {
-        AddTodays,
-        setAddTodays,
-        SaveAs,
-        setSaveAs,
-        addToToday,
-        saveForLater,
-        removeFromToday,
-        removeFromSaved,
-        markAsDone,
-    };
-
     return (
-        <ExContext.Provider value={sharedData}>
+        <ExContext.Provider
+            value={{
+                AddTodays,
+                setAddTodays,
+                SaveAs,
+                setSaveAs,
+                addToToday,
+                saveForLater,
+                removeFromToday,
+                removeFromSaved,
+                markAsDone,
+            }}
+        >
             {children}
         </ExContext.Provider>
     );

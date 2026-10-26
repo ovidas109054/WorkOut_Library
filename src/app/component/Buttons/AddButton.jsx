@@ -3,7 +3,6 @@
 
 import { useContext } from "react";
 import { Dumbbell } from "lucide-react";
-import { toast } from "react-toastify";
 import { ExContext } from "../../context/ExProvider";
 import { toast } from "react-toastify";
 
@@ -15,10 +14,12 @@ const AddButton = ({ exercise }) => {
     const handleAdd = () => {
         const result = addToToday(exercise);
 
-        if (result) {
-            toast.success("Added to today's plan!");
-        } else {
-            toast.error("Already added or maximum limit reached!");
+        if (result === "success") {
+            toast.success("Exercise added to today's plan!");
+        } else if (result === "duplicate") {
+            toast.warning("Already in your plan! Remove it before adding again.");
+        } else if (result === "limit") {
+            toast.error("Your plan is full! Remove an exercise first.");
         }
     };
 

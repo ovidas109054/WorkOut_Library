@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ExContext } from "../context/ExProvider";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const MyPlan = () => {
     const {
@@ -28,7 +29,7 @@ const MyPlan = () => {
     );
 
     const totalCalories = AddTodays.reduce(
-        (total, item) => total + Number(item.calories || 0),
+        (total, item) => total + Number(item.caloriesBurned || 0),
         0
     );
 
@@ -111,12 +112,14 @@ const MyPlan = () => {
                             Add an exercise to see it here.
                         </p>
 
-                        <button
-                            onClick={() => router.push("/home")}
-                            className="mt-4 rounded-lg bg-lime-400 px-4 py-2 text-black"
+                        
+
+                        <Link
+                            href="/WorkOut"
+                            className="mt-4 inline-block rounded-lg bg-lime-400 px-4 py-2 text-black hover:scale-105 transition"
                         >
                             Go to Workouts
-                        </button>
+                        </Link>
                     </div>
                 ) : (
                     exercises.map((item) => (
