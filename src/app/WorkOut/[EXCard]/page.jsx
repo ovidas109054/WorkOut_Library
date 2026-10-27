@@ -1,18 +1,36 @@
 import React from 'react';
 import Image from 'next/image';
-import { Bookmark } from "lucide-react";
 import AddButton from '../../component/Buttons/AddButton';
 import SaveButton from '../../component/Buttons/SaveButton';
 
 
+export const instant = false;
+const API_URL = "https://api.api-store.workers.dev/api/fitlog";
+
+export async function generateStaticParams() {
+    const res = await fetch(API_URL);
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch exercises");
+    }
+
+    const exercises = await res.json();
+
+    return exercises.map((exercise) => ({
+        EXCard: String(exercise.id),
+    }));
+}
+
 const page = async ({ params }) => {
+    
     const { EXCard } = await params
-    const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${EXCard}`, { cache: "force-cache" });
+    
+    const res = await fetch(`${API_URL}/${EXCard}`, { cache: "force-cache" });
     if (!res.ok) {
         throw new Error("Fail to load data")
     } const data = await res.json();
 
-    const { id, name, image, equipment, difficulty, duration, caloriesBurned, rating, sets, reps, description, instructions, muscleGroups } = data;
+    const { name, image, equipment, difficulty, duration, caloriesBurned, rating, sets, reps, description, instructions, muscleGroups } = data;
     return (
         <div className="grid grid-cols-2 container mx-auto m-10 p-10">
 
