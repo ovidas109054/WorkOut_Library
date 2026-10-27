@@ -1,12 +1,6 @@
-import React from 'react';
 
+import { redirect } from "next/navigation";
 
-const page = async () => {
-  return (
-    <div>
-
-    </div>
-  );
-};
-
-export default page;
+export default function Home() {
+    redirect("/WorkOut");
+}

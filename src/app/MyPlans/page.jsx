@@ -2,7 +2,6 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
 import { ExContext } from "../context/ExProvider";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -19,7 +18,7 @@ const MyPlan = () => {
 
     const [activeTab, setActiveTab] = useState("today");
     const [sortBy, setSortBy] = useState("duration");
-    const router = useRouter();
+   
 
     const exercises = activeTab === "today" ? AddTodays : SaveAs;
 
@@ -132,8 +131,7 @@ const MyPlan = () => {
                                 id="sortBy"
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
-                                className="appearance-none rounded-lg border border-gray-700 bg-gray-900 py-2 pl-3 pr-10 text-sm text-white outline-none hover:border-lime-400 focus:border-lime-400"
-                            >
+                                className="appearance-none rounded-lg border border-gray-700 bg-gray-900 py-2 pl-3 pr-10 text-sm text-white outline-none hover:border-lime-400 focus:border-lime-400">
                                 <option value="duration">Duration</option>
                                 <option value="calories">Calories</option>
                                 <option value="rating">Rating</option>
@@ -148,8 +146,7 @@ const MyPlan = () => {
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                aria-hidden="true"
-                            >
+                                aria-hidden="true">
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </div>
@@ -175,8 +172,7 @@ const MyPlan = () => {
 
                         <Link
                             href="/WorkOut"
-                            className="mt-4 inline-block rounded-lg bg-lime-400 px-4 py-2 font-medium text-black transition hover:scale-105"
-                        >
+                            className="mt-4 inline-block rounded-lg bg-lime-400 px-4 py-2 font-medium text-black transition hover:scale-105">
                             Go to Workouts
                         </Link>
                     </div>
@@ -185,23 +181,22 @@ const MyPlan = () => {
                         <div
                             key={item.id}
                             className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border p-4 ${item.completed
-                                    ? "border-lime-400/30 bg-gray-900/60"
-                                    : "border-gray-800 bg-gray-900"
-                                }`}
-                        >
+                                ? "border-lime-400/30 bg-gray-900/60"
+                                : "border-gray-800 bg-gray-900"
+                                }`}>
                             <div className="min-w-0 flex-1">
                                 <h3
                                     className={`font-bold ${item.completed
-                                            ? "text-gray-400 line-through"
-                                            : "text-white"
-                                        }`}
-                                >
+                                        ? "text-gray-400 line-through"
+                                        : "text-white"
+                                        }`}>
                                     {item.name ?? item.title}
                                 </h3>
 
                                 <p className="mt-1 text-sm text-gray-400">
                                     {item.duration ?? 0} minutes ·{" "}
-                                    {item.caloriesBurned ?? 0} kcal
+                                    {item.caloriesBurned ?? 0} kcal .{" "}
+                                    {item.rating ?? 0} rating
                                 </p>
 
                                 {item.completed && activeTab === "today" && (
@@ -212,25 +207,24 @@ const MyPlan = () => {
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                                <button
-                                    onClick={() => router.push(`/WorkOut/${item.id}`)}
-                                    className="rounded-lg border border-gray-700 px-3 py-2 text-sm transition hover:border-lime-400 hover:text-lime-400"
-                                >
+
+                                <Link
+                                    href={`/WorkOut/${item.id}`}
+                                    className="rounded-lg border border-gray-700 px-3 py-2 text-sm transition hover:border-lime-400 hover:text-lime-400">
                                     View Details
-                                </button>
+                                </Link>
+
 
                                 {activeTab === "today" ? (
                                     <button
                                         onClick={() => handleDone(item)}
-                                        className="rounded-lg bg-lime-400 px-3 py-2 text-sm font-medium text-black transition hover:bg-lime-300"
-                                    >
-                                        {item.completed ? "Undo Done" : "Mark as Done"}
+                                        className="rounded-lg bg-lime-400 px-3 py-2 text-sm font-medium text-black transition hover:bg-lime-300">
+                                        {item.completed ? "Mark as Done ✓" : "Mark as Done"}
                                     </button>
                                 ) : (
                                     <button
                                         onClick={() => handleAdd(item)}
-                                        className="rounded-lg bg-lime-400 px-3 py-2 text-sm font-medium text-black transition hover:bg-lime-300"
-                                    >
+                                        className="rounded-lg bg-lime-400 px-3 py-2 text-sm font-medium text-black transition hover:bg-lime-300">
                                         Add to Plan
                                     </button>
                                 )}
@@ -238,10 +232,7 @@ const MyPlan = () => {
                                 <button
                                     onClick={() => handleRemove(item.id)}
                                     aria-label={`Remove ${item.name ?? item.title}`}
-                                    className="rounded-lg px-3 py-2 text-sm text-red-400 transition hover:bg-red-400/10 hover:text-red-300"
-                                >
-                                    Remove
-                                </button>
+                                    className="rounded-lg px-3 py-2 text-sm text-gray-400 transition hover:bg-red-400/10 hover:text-red-300"> X </button>
                             </div>
                         </div>
                     ))

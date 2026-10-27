@@ -64,16 +64,14 @@ const Navbar = () => {
                 <div className="navbar-end gap-2 sm:gap-4">
                     <Link
                         href="/MyPlans"
-                        className="btn bg-transparent"
-                    >
-                        Plan ({AddTodays.length})
+                        className="bg-transparent">
+                        Plan <span className="  bg-lime-400 rounded-full">{AddTodays.length}</span>
                     </Link>
 
                     <Link
                         href="/MyPlans?tab=saved"
-                        className="btn bg-transparent"
-                    >
-                        Saved ({SaveAs.length})
+                        className="bg-transparent">
+                        Saved <span className=" bg-lime-400 rounded-full">{SaveAs.length}</span>
                     </Link>
                 </div>
 
