@@ -6,7 +6,6 @@ import { Dumbbell } from "lucide-react";
 import { ExContext } from "../../context/ExProvider";
 import { toast } from "react-toastify";
 
-toast.success("Added to today's plan!");
 
 const AddButton = ({ exercise }) => {
     const { addToToday } = useContext(ExContext);

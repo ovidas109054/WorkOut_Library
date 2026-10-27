@@ -14,18 +14,12 @@ const Navbar = () => {
     const link = (
         <>
             <li>
-                <Link
-                    className={pathname === "/WorkOut" ? "text-lime-400 bg-gray-700 rounded-2xl" : ""}
-                    href="/WorkOut"
-                >
+                <Link className={pathname === "/WorkOut" ? "text-lime-400 bg-gray-700 rounded-2xl" : ""}href="/WorkOut">
                     Workouts
                 </Link>
             </li>
             <li>
-                <Link
-                    className={pathname === "/MyPlans" ? "text-lime-400 bg-gray-700 rounded-2xl" : ""}
-                    href="/MyPlans"
-                >
+                <Link className={pathname === "/MyPlans" ? "text-lime-400 bg-gray-700 rounded-2xl" : ""}href="/MyPlans">
                     My Plans
                 </Link>
             </li>
