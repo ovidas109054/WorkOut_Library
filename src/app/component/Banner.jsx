@@ -11,12 +11,12 @@ const banner = () => {
                     <h1 className="text-5xl font-bold mt-2">TRAIN WITH INTENT. <br />LOG EVERY SET.</h1>
                     <h2 className="text-gray-500 mt-4"> FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br/>
                         into today&apos;s plan, and watch the week&apos;s work add up.</h2>
-                    <Link href="/home" className="btn mt-6 min-h-11 border-0 bg-lime-400 px-6 text-xs font-bold uppercase text-black shadow-none hover:bg-lime-300">
+                    <Link href="/WorkOut" className="btn mt-6 min-h-11 border-0 bg-lime-400 px-6 text-xs font-bold uppercase text-black shadow-none hover:bg-lime-300">
                         Browse Workouts
                     </Link>
                 </div>
                 <div className="flex items-center justify-center">
-                    <Image src="/vanner.png" alt="Banner" width={360} height={360}></Image>
+                    <Image src="/banner.png" alt="Banner" width={360} height={360} priority />
                 </div>
             </div>
         </div>
